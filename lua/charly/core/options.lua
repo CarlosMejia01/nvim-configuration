@@ -59,15 +59,15 @@ opt.hidden = true -- Allow multple buffers
 opt.smarttab = true
 
 -- cursor line
---opt.cursorline = true -- Highlight the current cursor line (Can slow the UI)
+opt.cursorline = true -- Highlight the current cursor line (Can slow the UI)
 
 -- appearance
 opt.termguicolors = true -- Required for some themes
---opt.background = "dark"
---opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text
---opt.winblend = 0
---opt.wildoptions = "pum"
---opt.pumblend = 5
+opt.background = "dark"
+-- opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text
+opt.winblend = 0
+opt.wildoptions = "pum"
+opt.pumblend = 5
 
 -- backspace
 opt.backspace = { "start,eol,indent" }
