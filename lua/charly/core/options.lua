@@ -9,11 +9,11 @@ opt.title = true
 opt.hlsearch = true -- Highlight search results
 opt.backup = false
 opt.showcmd = true
-opt.cmdheight = 2 -- Shows better messages
+opt.cmdheight = 1 -- Shows better messages
 opt.laststatus = 2
 opt.scrolloff = 10
-opt.shell = "fish"
-opt.backupskip = "/tmp/*,"
+--opt.shell = "fish"
+opt.backupskip = "/tmp/*,/private/tmp/*"
 opt.inccommand = "split"
 opt.breakindent = true
 opt.ai = true -- Auto indent
@@ -29,8 +29,8 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- Turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
-	pattern = "*",
-	command = "set nopaste",
+  pattern = "*",
+  command = "set nopaste",
 })
 
 -- Add asterisks in clock comments
@@ -41,9 +41,8 @@ opt.relativenumber = true -- Movements like 5j or 5k
 opt.number = true -- Show numbers on the left
 
 -- tabs & indentation
-opt.tabstop = 4 -- Tab size of 4 spaces
-opt.softtabstop = 4 -- On insert use 4 spaces for tab
-opt.shiftwidth = 0 -- Number of spaces to use for each step of (auto)indent
+opt.tabstop = 2 -- Tab size of 4 spaces
+opt.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
 opt.expandtab = true -- Use appropriate number of spaces (no so good for PHP but we can fix this in ft)
 opt.autoindent = true
 
@@ -57,26 +56,25 @@ opt.smartcase = true -- Do not ignore case if the search patter has uppercase
 opt.mouse = "i" -- Enable mouse on insert mode
 opt.showmatch = true -- Enable mouse on insert mode
 opt.hidden = true -- Allow multple buffers
+opt.smarttab = true
 
 -- cursor line
-opt.cursorline = true -- Highlight the current cursor line (Can slow the UI)
+--opt.cursorline = true -- Highlight the current cursor line (Can slow the UI)
 
 -- appearance
 opt.termguicolors = true -- Required for some themes
-opt.background = "dark"
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text
-opt.winblend = 0
-opt.wildoptions = "pum"
-opt.pumblend = 5
+--opt.background = "dark"
+--opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text
+--opt.winblend = 0
+--opt.wildoptions = "pum"
+--opt.pumblend = 5
 
 -- backspace
-opt.backspace = "indent,eol,start"
+opt.backspace = { "start,eol,indent" }
 
--- clipboard
-opt.clipboard:append("unnamedplus")
 
 -- split windows
-opt.splitright = true
-opt.splitbelow = true
+--opt.splitright = true
+--opt.splitbelow = true
 
-opt.iskeyword:append("-")
+--opt.iskeyword:append("-")
