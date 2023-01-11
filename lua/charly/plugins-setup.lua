@@ -1,13 +1,13 @@
 -- auto install packer if not installed
 local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd([[packadd packer.nvim]])
+    return true
+  end
+  return false
 end
 local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
@@ -23,101 +23,121 @@ vim.cmd([[
 -- import packer safely
 local status, packer = pcall(require, "packer")
 if not status then
-	return
+  return
 end
 
 -- add list of plugins to install
 return packer.startup(function(use)
-	-- packer can manage itself
-	use("wbthomason/packer.nvim")
 
-	use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
+  --search words across multiple files
+  -- use({
+  -- 	"windwp/nvim-spectre",
+  -- 	requires = {
+  -- 		"nvim-lua/plenary.nvim",
+  -- 	},
+  -- 	config = function()
+  -- 		require("spectre").setup()
+  -- 	end,
+  -- })
 
-	use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
+  -- packer can manage itself
+  use("wbthomason/packer.nvim")
 
-	use("christoomey/vim-tmux-navigator")
+  use("lukas-reineke/indent-blankline.nvim") --This plugin adds indentation guides to all lines (including empty lines).
 
-	use("szw/vim-maximizer") -- maximizes and restores current window
+  use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
 
-	-- essential plugins
-	use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
-	use("vim-scripts/ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
+  use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
 
-	-- commenting with gc
-	use("numToStr/Comment.nvim")
+  --use("christoomey/vim-tmux-navigator")
+  use({
+    "aserowy/tmux.nvim",
+    config = function()
+      require("tmux").setup()
+    end,
+  })
+  --
+  use("szw/vim-maximizer") -- maximizes and restores current window
 
-	-- file explorer
-	use("nvim-tree/nvim-tree.lua")
+  -- essential plugins
+  use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
+  use("vim-scripts/ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
 
-	-- vs-code like icons
-	use("kyazdani42/nvim-web-devicons") -- File icons
+  -- commenting with gc
+  use("numToStr/Comment.nvim")
 
-	-- statusline
-	use("nvim-lualine/lualine.nvim")
+  -- file explorer
+  use("nvim-tree/nvim-tree.lua")
 
-	-- fuzzy finding w/ telescope
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
-	use({ "nvim-telescope/telescope.nvim" }) -- fuzzy finder
-	use({ "nvim-telescope/telescope-file-browser.nvim" }) -- fuzzy finder
+  -- vs-code like icons
+  use("kyazdani42/nvim-web-devicons") -- File icons
 
-	-- autocompletion
-	use("hrsh7th/nvim-cmp") -- completion plugin
-	use("hrsh7th/cmp-buffer") -- source for text in buffer
-	use("hrsh7th/cmp-path") -- source for file system paths
+  -- statusline
+  use("nvim-lualine/lualine.nvim")
 
-	-- snippets
-	use("L3MON4D3/LuaSnip") -- snippet engine
-	use("saadparwaiz1/cmp_luasnip") -- for autocompletion
-	use("rafamadriz/friendly-snippets") -- useful snippets
+  -- fuzzy finding w/ telescope
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
+  use({ "nvim-telescope/telescope.nvim" }) -- fuzzy finder
+  use({ "nvim-telescope/telescope-file-browser.nvim" }) -- fuzzy finder
 
-	-- managing & installing lsp servers, linters & formatters
-	use("williamboman/mason.nvim") -- in charge of managing lsp servers, linters & formatters
-	use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
+  -- autocompletion
+  use("hrsh7th/nvim-cmp") -- completion plugin
+  use("hrsh7th/cmp-buffer") -- source for text in buffer
+  use("hrsh7th/cmp-path") -- source for file system paths
 
-	-- configuring lsp servers
-	use("neovim/nvim-lspconfig") -- easily configure language servers
-	use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
-	use("glepnir/lspsaga.nvim") -- enhanced lsp uis
-	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
-	use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
+  -- snippets
+  use("L3MON4D3/LuaSnip") -- snippet engine
+  use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+  use("rafamadriz/friendly-snippets") -- useful snippets
 
-	-- formatting & linting
-	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
-	use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+  -- managing & installing lsp servers, linters & formatters
+  use("williamboman/mason.nvim") -- in charge of managing lsp servers, linters & formatters
+  use("williamboman/mason-lspconfig.nvim") -- bridges gap b/w mason & lspconfig
 
-	use("MunifTanjim/prettier.nvim") --Prettier plugin for Neovim's built-in LSP client
+  -- configuring lsp servers
+  use("neovim/nvim-lspconfig") -- easily configure language servers
+  use("hrsh7th/cmp-nvim-lsp") -- for autocompletion
+  use("glepnir/lspsaga.nvim") -- enhanced lsp uis
+  use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
+  use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
-	-- treesitter configuration
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
-		end,
-	})
+  -- formatting & linting
+  use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
+  use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
+  --
+  use("MunifTanjim/prettier.nvim") --Prettier plugin for Neovim's built-in LSP client
 
-	use("akinsho/nvim-bufferline.lua")
-	use("norcalli/nvim-colorizer.lua")
+  -- treesitter configuration
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+      require("nvim-treesitter.install").update({ with_sync = true })
+    end,
+  })
 
-	-- auto closing
-	use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
-	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
+  use("akinsho/nvim-bufferline.lua") --(ERROR)
+  use("norcalli/nvim-colorizer.lua")
 
-	-- restore session
-	use({
-		"rmagatti/auto-session",
-		config = function()
-			require("auto-session").setup({
-				log_level = "error",
-				auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-			})
-		end,
-	})
+  -- auto closing
+  use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
+  use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" }) -- autoclose tags
 
-	-- git integration
-	use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
-	use("dinhhuy258/git.nvim") -- For git blame & browser
+  -- restore session
+  use({
+    "rmagatti/auto-session",
+    config = function()
+      require("auto-session").setup({
+        log_level = "error",
+        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      })
+    end,
+  })
 
-	if packer_bootstrap then
-		require("packer").sync()
-	end
+  -- git integration
+  use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
+  use("dinhhuy258/git.nvim") -- For git blame & browser
+
+  if packer_bootstrap then
+    require("packer").sync()
+  end
 end)
