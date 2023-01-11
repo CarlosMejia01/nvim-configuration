@@ -8,7 +8,11 @@ vim.g.mapleader = " "
 --   term_mode         = "t",
 --   command_mode      = "c",
 
+
 local keymap = vim.keymap -- for conciseness
+
+
+
 
 -- general keymaps
 
@@ -19,7 +23,15 @@ local opts = { noremap = true, silent = true }
 local expr = { noremap = true, silent = true, expr = true }
 
 -- Don't jump when using *
-keymap.set("n", "*", "*<C-o>", opts)
+--keymap.set("n", "*", "*<C-o>", opts)
+
+-- Tabmove
+keymap.set("n", "<A-Left>", ":-tabmove<CR>", opts)
+keymap.set("n", "<A-Right>", ":+tabmove<CR>", opts)
+
+keymap.set("n", "<C-I>", "<C-I>", { noremap = true })
+
+keymap.set("n", "<C-I>", "<C-I>", { noremap = true })
 
 -- Keep search matches in the middle of the window
 keymap.set("n", "n", "nzzzv", opts)
@@ -29,11 +41,6 @@ keymap.set("n", "N", "Nzzzv", opts)
 keymap.set("v", "<", "<gv", opts)
 keymap.set("v", ">", ">gv", opts)
 
--- YY/XX Copy/Cut into the system clipboard
-vim.cmd([[
-noremap YY "+y<CR>
-noremap XX "+x<CR>
-]])
 
 keymap.set("n", "<leader>nh", ":nohl<CR>")
 
@@ -45,7 +52,7 @@ keymap.set("n", "<leader>+", "<C-a>")
 keymap.set("n", "<leader>-", "<C-x>")
 
 -- Delete a word backwards
-keymap.set("n", "dw", 'vb"_d')
+keymap.set("n", "dw", 'vb"_dh')
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
