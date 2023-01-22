@@ -1,6 +1,7 @@
 local opt = vim.opt -- for conciseness
 vim.cmd("autocmd!")
 
+
 vim.scriptencoding = "utf-8"
 vim.encoding = "utf-8"
 vim.fileencoding = "utf-8"
@@ -22,6 +23,7 @@ opt.wrap = false -- No wrap lines
 opt.path:append({ "**" }) -- finding files - Search down into subfolders
 
 opt.wildignore:append({ "*/node_modules/*" })
+opt.clipboard = 'unnamedplus' --clipboard
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

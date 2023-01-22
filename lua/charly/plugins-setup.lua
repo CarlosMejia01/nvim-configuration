@@ -135,7 +135,7 @@ return packer.startup(function(use)
 
   -- git integration
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
-  use("dinhhuy258/git.nvim") -- For git blame & browser
+  --use("dinhhuy258/git.nvim") -- For git blame & browser
 
   if packer_bootstrap then
     require("packer").sync()
