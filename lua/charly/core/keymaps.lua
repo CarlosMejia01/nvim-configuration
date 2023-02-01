@@ -114,3 +114,11 @@ keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in 
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
+
+
+-- telescope git
+keymap.set("n", "<leader>fgc", "<cmd>Telescope git_commits<cr>") -- find files within current working directory, respects .gitignore
+keymap.set("n", "<leader>fgbc", "<cmd>Telescope git_bcommits<cr>") -- find string in current working directory as you type
+keymap.set("n", "<leader>fbr", "<cmd>Telescope git_branches<cr>") -- find string under cursor in current working directory
+keymap.set("n", "<leader>fgs", "<cmd>Telescope git_status<cr>") -- list open buffers in current neovim instance
+keymap.set("n", "<leader>fsh", "<cmd>Telescope git_stash<cr>") -- list available help tags
